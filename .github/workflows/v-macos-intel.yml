@@ -11,17 +11,17 @@ on:
       - '**/*.sh'
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: macos-15-intel
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
         with:
           submodules: true
       - name: install dependencies
         run: |
           brew install llvm
+          python3 -m venv "$RUNNER_TEMP/cmake3"
+          "$RUNNER_TEMP/cmake3/bin/pip" install "cmake>=3.28,<4"
+          echo "$RUNNER_TEMP/cmake3/bin" >> "$GITHUB_PATH"
       - run: rustup component add rustfmt
       - name: cargo test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --features=vendored
+        run: cargo test --features=vendored

@@ -13,10 +13,10 @@ env:
 jobs:
   test:
     name: Test on Linux aarch64
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: install dependencies
@@ -32,7 +32,4 @@ jobs:
           override: true
           components: rustfmt
       - name: cargo test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --lib --target aarch64-unknown-linux-gnu --features=vendored
+        run: cargo test --lib --target aarch64-unknown-linux-gnu --features=vendored

@@ -11,9 +11,9 @@ on:
       - '**/*.sh'
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: macos-15-intel
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
         with:
           submodules: true
       - name: install dependencies
@@ -21,7 +21,4 @@ jobs:
           brew install llvm
       - run: rustup component add rustfmt
       - name: cargo test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --features=vendored
+        run: cargo test --features=vendored

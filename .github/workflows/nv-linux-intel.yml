@@ -10,9 +10,9 @@ on:
       - '**/.gitignore'
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - name: install dependencies
         run: |
           sudo apt-get update
@@ -26,6 +26,4 @@ jobs:
           sudo make install
       - run: rustup component add rustfmt
       - name: cargo test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
+        run: cargo test

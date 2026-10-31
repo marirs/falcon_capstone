@@ -17,9 +17,11 @@ jobs:
       - name: install dependencies
         run: |
           brew install llvm capstone
+          CAPSTONE_PREFIX=$(brew --prefix capstone)
+          echo "CPATH=$CAPSTONE_PREFIX/include" >> "$GITHUB_ENV"
+          echo "LIBRARY_PATH=$CAPSTONE_PREFIX/lib" >> "$GITHUB_ENV"
+          echo "CAPSTONE_INCLUDE_DIR=$CAPSTONE_PREFIX/include" >> "$GITHUB_ENV"
+          echo "CAPSTONE_LIBRARY_PATH=$CAPSTONE_PREFIX/lib" >> "$GITHUB_ENV"
       - run: rustup component add rustfmt
       - name: cargo test
-        env:
-          CPATH: $(brew --prefix)/Cellar/capstone/4.0.2/include
-          LIBRARY_PATH: $(brew --prefix)/Cellar/capstone/4.0.2/lib
         run: cargo test

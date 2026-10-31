@@ -41,6 +41,7 @@ mod build {
 
     pub fn build_and_link() {
         let dst = cmake::Config::new("capstone")
+            .define("CMAKE_POLICY_VERSION_MINIMUM", "3.5")
             .define("BUILD_SHARED_LIBS", "OFF")
             .build();
 

@@ -106,7 +106,7 @@ impl cs_arm64_op {
         unsafe { &self.__bindgen_anon_1.pstate }
     }
     pub fn sys(&self) -> u32 {
-        unsafe { self.__bindgen_anon_1.sys }
+        unsafe { self.__bindgen_anon_1.sys as u32 }
     }
     pub fn prefetch(&self) -> &arm64_prefetch_op {
         unsafe { &self.__bindgen_anon_1.prefetch }
